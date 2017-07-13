@@ -3,18 +3,15 @@ var router = express.Router();
 
 const db = require('../models');
 
-// var bodyParser = require('body-parser');
-// app.use(bodyParser.urlencoded({extended: false}));
-// app.use(bodyParser.json());
-
 router.get('/', function(req, res) {
-  // teacher.findAll({
-  //   res.render('teachers.ejs', {})
-  // })
   db.Teacher.findAll()
   .then((results) => {
     res.render('teachers', {teachers: results})
   })
 })
+
+// router.get('/add', function (req, res) {
+//   res.render('teacher_add', {})
+// })
 
 module.exports = router
