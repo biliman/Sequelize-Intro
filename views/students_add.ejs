@@ -7,16 +7,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   </head>
   <body>
-    <form action="" method="post" class="STYLE-NAME">
-      <h3>STUDENT NAME FORM</h3>
-      <label>
-        <input id="name" type="text" name="firstname" placeholder="First Name" />
-        <input id="name" type="text" name="lastname" placeholder="Last Name" />
-        <input id="name" type="text" name="email" placeholder="Email" />
-      </label>
-      <label>
-        <input type="submit" class="button" value="ADD Student" /> 
-      </label>    
+    <h3>STUDENT ADD FORM</h3>
+    <% if (error != '') { %>
+    <div class="alert alert-info">
+      <strong>Info!</strong> <%= error %>
+    </div>      
+    <% } %>
+    <form action="/students/add" method="post" class="STYLE-NAME">
+      <input id="name" type="text" name="firstname" placeholder="First Name" /><br><br>
+      <input id="name" type="text" name="lastname" placeholder="Last Name" /><br><br>
+      <input id="name" type="text" name="email" placeholder="Email" />
+      <br><br>
+      <input type="submit" class="button" value="ADD Student" />
     </form>
   </body>
 </html>

@@ -14,23 +14,48 @@ router.get('/', (req, res) => {
 })
 
 router.get('/add', (req,res) => {
-  res.render('students_add', {})
+  res.render('students_add', {error: ''})
 })
 
 router.post('/add', (req, res) => {
-  db.Student.create({
-    first_name: req.body.firstname,
-    last_name: req.body.lastname,
-    email: req.body.email,
-    createdAt: new Date(),
-    updatedAt: new Date()
+  db.Student.findOne({
+    where: {
+      email : req.body.email
+    }
   })
-  .then(() => {
-    res.redirect('/students')
+  .then(result => {
+    if (!result) {
+      db.Student.create({
+        first_name: req.body.firstname,
+        last_name: req.body.lastname,
+        email: req.body.email,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      })
+      .then(() => {
+        res.redirect('/students')
+      })
+      .catch(err => {
+        res.render('students_add', {error: err.message})
+      })
+    } else {
+      res.render('students_add', {error: 'Email already exists, Please use other email address, OK?'})
+    }
   })
-  .catch(err => {
-    res.redirect('/add')
-  })
+  // 
+  // db.Student.create({
+  //   first_name: req.body.firstname,
+  //   last_name: req.body.lastname,
+  //   email: req.body.email,
+  //   createdAt: new Date(),
+  //   updatedAt: new Date()
+  // })
+  // .then(() => {
+  //   res.redirect('/students')
+  // })
+  // .catch(err => {
+  //   res.render("Error : " + err.message);
+  // })
 })
 
 router.get('/edit/:id', (req,res) => {
