@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   </head>
   <body>
-    <form action="" method="post" class="STYLE-NAME">
-      <h3>STUDENT NAME FORM</h3>
-      <label>
-        <input value="<%= student.first_name %>" id="name" type="text" name="firstname" placeholder="First Name" />
-        <input value="<%= student.last_name %>" id="name" type="text" name="lastname" placeholder="Last Name" />
+    <form action="/students/edit/<%= student.id %>" method="post" class="STYLE-NAME">
+      <h3>STUDENT EDIT FORM</h3>
+        <input value="<%= student.first_name %>" id="name" type="text" name="firstname" placeholder="First Name" /><br><br>
+        <input value="<%= student.last_name %>" id="name" type="text" name="lastname" placeholder="Last Name" /><br><br>
         <input value="<%= student.email %>" id="name" type="text" name="email" placeholder="Email" />
-      </label>
-      <label>
+        <br><br>
         <input type="submit" class="button" value="Edit Student" /> 
       </label>    
     </form>

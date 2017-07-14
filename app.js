@@ -9,6 +9,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // index
+var index = require('./routes/index');
+app.use('/index', index)
 
 // teachers
 var teachers = require('./routes/teachers');

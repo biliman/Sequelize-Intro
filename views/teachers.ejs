@@ -4,26 +4,36 @@
     <meta charset="utf-8">
     <title>teachers</title>
     <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     </head>
   <body>
-    <!-- <%= JSON.stringify(teachers) %> -->
+    <!-- <%= JSON.stringify(query, null, 2) %> -->
     <!-- <a class="btn btn-default" href="/teachers/add">ADD New Teacher</a> -->
     <h2 align="center">TEACHERS DATA</H2>
+    <h5 align="center"><a href="/teachers/add" id="hyper">ADD New Teacher</a></h5>
     <table class="table table-hover">
       <tr>
         <th>No.</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
+        <th>FIRST NAME</th>
+        <th>LAST NAME</th>
+        <th>EMAIL</th>
+        <th>SUBJECT</th>
+        <th>ACTION</th>
       </tr>
-      <% teachers.forEach((teacher, nomor) => { %>
+      <% query.forEach((teacher, nomor) => { %>
       <tr>
         <td><%= nomor + 1 %></td>    
         <td><%= teacher.first_name %></td>
         <td><%= teacher.last_name %></td>
         <td><%= teacher.email %></td>
+        <% if (teacher.SubjectId == undefined) { %>
+          <td>unassigned</td>
+        <% } else { %>
+          <td><%= teacher.Subject.subject_name %></td>
+        <% } %>
+        <td><a href="/teachers/edit/<%= teacher.id %>">EDIT</a> || <a href="/teachers/delete/<%= teacher.id %>" style="color:red" onclick="return confirm('Are you sure want to delete this record?')">DELETE</a></td> 
       </tr>
       <% }) %>
     </table>
