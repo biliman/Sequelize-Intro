@@ -19,9 +19,7 @@ router.get('/add', (req,res) => {
 
 router.post('/add', (req, res) => {
   db.Student.findOne({
-    where: {
-      email : req.body.email
-    }
+    where: {email : req.body.email}
   })
   .then(result => {
     if (!result) {
@@ -44,11 +42,9 @@ router.post('/add', (req, res) => {
   })
 })
 
-router.get('/edit/:id/addsubject', (req, res) => {
+router.get('/:id/addsubject', (req, res) => {
   db.Student.findOne({
-    where: {
-      id: req.params.id
-    }
+    where: {id: req.params.id}
   })
   .then(dataStudentById => {
     db.Subject.findAll()
@@ -61,7 +57,7 @@ router.get('/edit/:id/addsubject', (req, res) => {
   })
 })
 
-router.post('/edit/:id/addsubject', (req, res) => {
+router.post('/:id/addsubject', (req, res) => {
   db.Student_Subject.create({
     StudentId: req.params.id,
     SubjectId: req.body.subject,
@@ -78,9 +74,7 @@ router.post('/edit/:id/addsubject', (req, res) => {
 
 router.get('/edit/:id', (req,res) => {
   db.Student.findOne({
-    where: {
-      id: req.params.id
-    }
+    where:{id: req.params.id}
   })
   .then(dataStudentById => {
     res.render('students_edit', {query: dataStudentById})
@@ -98,9 +92,7 @@ router.post('/edit/:id', (req, res)=> {
     createdAt: new Date(),
     updatedAt: new Date()
   },{
-    where: {
-      id: req.params.id
-    }
+    where: {id: req.params.id}
   })
   .then(() => {
     res.redirect('/students')
@@ -112,9 +104,7 @@ router.post('/edit/:id', (req, res)=> {
 
 router.get('/delete/:id', (req,res) => {
   db.Student.destroy({
-    where: {
-      id: req.params.id
-    }
+    where: {id: req.params.id}
   })
   .then(() => {
     res.redirect('/students')

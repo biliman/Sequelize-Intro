@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>give score</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- <%= JSON.stringify(query) %> -->
+    <!-- <p>============</p> -->
+    <h2 align="center"><%= query.Subject.subject_name %></H2>
+    <h5 align="center"><button class="btn btn-success" id="hyper" type="button" onclick="location.href='/subjects'">Return to Subject List</button></h5>
+    <p></p>
+    <table class="table table-hover">
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+      <tr>
+        <td><%= query.Student.first_name + ' ' + query.Student.last_name %></td>    
+        <td>
+          <form action="/subjects/<%= query.Student.id %>/givescore/<%= query.Subject.id %>" method="post">
+            <input type="text" name="score" value="" placeholder="0 - 100">
+            <input type="submit" class="btn btn-danger" value="Add Score &#9745" />
+          </form>
+        </td>
+      </tr>
+      
+    </table>
+  </body>
+</html>

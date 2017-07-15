@@ -55,9 +55,7 @@ router.post('/edit/:id', (req, res) => {
     createdAt: new Date(),
     updatedAt: new Date()
   },{
-    where: {
-      id: req.params.id
-    }
+    where: {id: req.params.id}
   })
   .then(() => {
     res.redirect('/teachers')
@@ -69,9 +67,7 @@ router.post('/edit/:id', (req, res) => {
 
 router.get('/delete/:id', (req, res) => {
   db.Teacher.destroy({
-    where: {
-      id: req.params.id
-    }
+    where: {id: req.params.id}
   })
   .then(() => {
     res.redirect('/teachers')
