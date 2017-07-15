@@ -42,26 +42,48 @@ router.post('/add', (req, res) => {
       res.render('students_add', {error: 'Email already exists, Please use other email address, OK?'})
     }
   })
-  // 
-  // db.Student.create({
-  //   first_name: req.body.firstname,
-  //   last_name: req.body.lastname,
-  //   email: req.body.email,
-  //   createdAt: new Date(),
-  //   updatedAt: new Date()
-  // })
-  // .then(() => {
-  //   res.redirect('/students')
-  // })
-  // .catch(err => {
-  //   res.render("Error : " + err.message);
-  // })
+})
+
+router.get('/edit/:id/addsubject', (req, res) => {
+  db.Student.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(dataStudentById => {
+    db.Subject.findAll()
+    .then(subjectBydataStudentId => {
+      res.render('students_edit_addsubject', {query: dataStudentById, query2: subjectBydataStudentId})
+    })
+  })
+  .catch(err => {
+    res.send("Error : " + err.message);
+  })
+})
+
+router.post('/edit/:id/addsubject', (req, res) => {
+  db.Student_Subject.create({
+    StudentId: req.params.id,
+    SubjectId: req.body.subject,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  })
+  .then(() => {
+    res.redirect('/students')
+  })
+  .catch(err => {
+    res.send("Error : " + err.message);
+  })
 })
 
 router.get('/edit/:id', (req,res) => {
-  db.Student.findById(req.params.id)
+  db.Student.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
   .then(dataStudentById => {
-    res.render('students_edit', {student: dataStudentById})
+    res.render('students_edit', {query: dataStudentById})
   })
   .catch(err => {
     res.send("Error : " + err.message);

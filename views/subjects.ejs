@@ -18,6 +18,7 @@
         <th>Subject Name</th>
         <th>Teacher's</th>
         <th>ACTION</th>
+        <th>OPTIONS</th>
       </tr>
       <% subjects.forEach((subject, nomor) => { %>
         <!-- <%= JSON.stringify(subject) %> -->
@@ -25,14 +26,11 @@
         <td><%= nomor + 1 %></td>    
         <td><%= subject.subject_name %></td>
         <td>
-          <ol>
-            <% subject.Teachers.forEach(teacher => { %>   
-              <!-- <%= JSON.stringify(teacher) %> -->
-              <li><%= teacher.first_name + ' ' + teacher.last_name %></li>
-            <% }) %>
-          </ol>
+          <% subject.Teachers.forEach((teacher, no) => { %>
+            <p><%= no + 1 %>. <%= teacher.first_name + ' ' + teacher.last_name %></p>
+          <% }) %>  
         </td>
-        
+        <td><a href="/subjects/<%= subject.id %>/enrolledstudents">ENROLLED STUDENTS</a></td>
         <td><a href="/subjects/edit/<%= subject.id %>">EDIT</a> || <a href="/subjects/delete/<%= subject.id %>" style="color:red" onclick="return confirm('Are you sure want to delete this record?')">DELETE</a></td> 
       </tr>
       <% }) %>

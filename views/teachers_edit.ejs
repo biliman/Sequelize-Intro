@@ -16,6 +16,7 @@
       <input value="<%= query.last_name %>" id="name" type="text" name="lastname" placeholder="Last Name" /><br><br>
       <input value="<%= query.email %>" id="name" type="text" name="email" placeholder="Email" /><br><br>
       <!-- <input value="<%=  %>" id="name" type="text" name="email" placeholder="Subjects" /> -->
+      <p><b>Choose Subject :</b></p>
       <select name="subject">
       <% if (query.SubjectId == undefined) { %> 
         <option value="">unassigned</option><br>        
@@ -29,7 +30,7 @@
         <% }) %>
       <% } %> 
       </select>
-      <p></p>
+      <p style="color:#db0fc6"><b>~~~~~~~~~~~~~~~~~~~~~~</b></p>
       <input type="submit" class="btn btn-success" value="Edit Teacher" />
     </form>
   </body>

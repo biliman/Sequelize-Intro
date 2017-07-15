@@ -7,13 +7,44 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   </head>
   <body>
-    <form action="/students/edit/<%= student.id %>" method="post" class="STYLE-NAME">
+    <div class="container">
+      <h3>STUDENT ADD SUBJECT FORM</h3>
+      <form action="/students/edit/<%= query.id %>" method="post" class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-sm-2">First Name :</label>
+          <div class="col-sm-10">
+            <p class="form-control-static"><input value="<%= query.first_name %>" type="text" name="firstname" /></p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label col-sm-2">Last Name :</label>
+          <div class="col-sm-10">
+            <p class="form-control-static"><input value="<%= query.last_name %>" type="text" name="lastname" /></p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label col-sm-2">Email :</label>
+          <div class="col-sm-10">
+            <p class="form-control-static"><input value="<%= query.email %>" type="text" name="email" /></p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label col-sm-2"></label>
+          <div class="col-sm-10">
+            <input type="submit" class="btn btn-success" value="Edit Student" /> 
+          </div>
+        </div>
+    </div>
+    <!-- <form action="/students/edit/<%= query.id %>" method="post" class="STYLE-NAME">
       <h3>STUDENT EDIT FORM</h3>
-        <input value="<%= student.first_name %>" id="name" type="text" name="firstname" placeholder="First Name" /><br><br>
-        <input value="<%= student.last_name %>" id="name" type="text" name="lastname" placeholder="Last Name" /><br><br>
-        <input value="<%= student.email %>" id="name" type="text" name="email" placeholder="Email" />
+        <input value="<%= query.first_name %>" id="name" type="text" name="firstname" placeholder="First Name" /><br><br>
+        <input value="<%= query.last_name %>" id="name" type="text" name="lastname" placeholder="Last Name" /><br><br>
+        <input value="<%= query.email %>" id="name" type="text" name="email" placeholder="Email" />
         <p></p>
         <input type="submit" class="btn btn-success" value="Edit Student" /> 
-    </form>
+    </form> -->
   </body>
 </html>
