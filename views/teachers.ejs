@@ -12,30 +12,34 @@
     <!-- <%= JSON.stringify(query, null, 2) %> -->
     <!-- <a class="btn btn-default" href="/teachers/add">ADD New Teacher</a> -->
     <h2 align="center">TEACHERS DATA</H2>
-    <h5 align="center"><a href="/teachers/add" id="hyper">ADD New Teacher</a></h5>
-    <table class="table table-hover">
-      <tr>
-        <th>No.</th>
-        <th>FIRST NAME</th>
-        <th>LAST NAME</th>
-        <th>EMAIL</th>
-        <th>SUBJECT</th>
-        <th>ACTION</th>
-      </tr>
-      <% query.forEach((teacher, nomor) => { %>
-      <tr>
-        <td><%= nomor + 1 %></td>    
-        <td><%= teacher.first_name %></td>
-        <td><%= teacher.last_name %></td>
-        <td><%= teacher.email %></td>
-        <% if (teacher.SubjectId == undefined) { %>
-          <td>unassigned</td>
-        <% } else { %>
-          <td><%= teacher.Subject.subject_name %></td>
-        <% } %>
-        <td><a href="/teachers/edit/<%= teacher.id %>">EDIT</a> || <a href="/teachers/delete/<%= teacher.id %>" style="color:red" onclick="return confirm('Are you sure want to delete this record?')">DELETE</a></td> 
-      </tr>
-      <% }) %>
-    </table>
+    <h5 align="center"><button class="btn btn-primary" id="hyper" type="button" onclick="location.href='/teachers/add' ">ADD New Teacher</button></h5>
+    <p></p>
+    <div class="">
+      <table class="table table-hover">
+        <tr>
+          <th>No.</th>
+          <th>FIRST NAME</th>
+          <th>LAST NAME</th>
+          <th>EMAIL</th>
+          <th>SUBJECT</th>
+          <th>ACTION</th>
+        </tr>
+        <% query.forEach((teacher, nomor) => { %>
+        <tr>
+          <td><%= nomor + 1 %></td>    
+          <td><%= teacher.first_name %></td>
+          <td><%= teacher.last_name %></td>
+          <td><%= teacher.email %></td>
+          <% if (teacher.SubjectId == undefined) { %>
+            <td>unassigned</td>
+          <% } else { %>
+            <td><%= teacher.Subject.subject_name %></td>
+          <% } %>
+          <td><a href="/teachers/edit/<%= teacher.id %>">EDIT</a> || <a href="/teachers/delete/<%= teacher.id %>" style="color:red" onclick="return confirm('Are you sure want to delete this record?')">DELETE</a></td> 
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+    
   </body>
 </html>

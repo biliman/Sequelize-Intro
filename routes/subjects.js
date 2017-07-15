@@ -4,7 +4,9 @@ var router = express.Router();
 const db = require('../models');
 
 router.get('/', function(req, res) {
-  db.Subject.findAll()
+  db.Subject.findAll({
+    include: db.Teacher
+  })
   .then((results) => {
     res.render('subjects', {subjects: results})
   })
