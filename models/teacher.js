@@ -10,12 +10,6 @@ module.exports = function(sequelize, DataTypes) {
   Teacher.associate = (models) => {
     Teacher.belongsTo(models.Subject)
   }
-  // , {
-  //   classMethods: {
-  //     associate: function(models) {
-  //       // associations can be defined here
-  //     }
-  //   }
-  // });
+  
   return Teacher;
 };
