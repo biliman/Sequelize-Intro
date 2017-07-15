@@ -85,6 +85,9 @@ router.get('/:id/enrolledstudents', (req, res) => {
 
 router.get('/:id_student/givescore/:id_subject', (req,res) => {
   db.Student_Subject.findById(req.params.id_student, {
+    where: { StudentId: req.params.id_student,
+      $and : { SubjectId: req.params.id_subject}
+  },
     include: [{all:true}]
   })
   .then(idStudent_Student_Subject => {
@@ -97,7 +100,9 @@ router.post('/:id_student/givescore/:id_subject', (req, res) => {
   db.Student_Subject.update({
     score: req.body.score
   },{
-    where: {id: req.params.id_student}
+    where: { StudentId: req.params.id_student,
+      $and: { SubjectId: req.params.id_subject}
+    }
   })
   .then(() => {
     res.redirect('/subjects/${req.params.id_subject}/enrolledstudents')
