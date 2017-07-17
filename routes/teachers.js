@@ -3,6 +3,14 @@ var router = express.Router();
 
 const db = require('../models');
 
+router.use((req, res, next) => {
+  if (req.session.user.role == 'headmaster') {
+    next()
+  } else {
+    res.send('Anda tidak punya akses ke menu ini!, headmaster yang bisa akses ke menu ini!')
+  }
+})
+
 router.get('/', function(req, res) {
   db.Teacher.findAll({
     include: db.Subject
