@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var letterScore = require('../helpers/letterScore')
+
 const db = require('../models');
 
 router.get('/', function(req, res) {
@@ -74,6 +76,11 @@ router.get('/:id/enrolledstudents', (req, res) => {
     include: [{all:true}]
   })
   .then((studentSubjectBySubjectId) => {
+    studentSubjectBySubjectId.forEach(score => {
+      score.letterScore = letterScore(score.score)
+      // console.log(score);
+    })
+    // studentSubjectBySubjectId.str = numScoreTOstrScore()
     res.render('subjects_enrolledstudents', {query: studentSubjectBySubjectId})
   })
   .catch(err => {
@@ -119,7 +126,8 @@ router.post('/:id_subject/givescore/:id_student', (req, res) => {
     }
   })
   .then(() => {
-    res.redirect('/subjects/${req.params.id_subject}/enrolledstudents')
+    // res.redirect(`/subjects/${req.params.id_subject}/enrolledstudents`)
+    res.redirect('/subjects/' + req.params.id_subject + '/enrolledstudents')
   })
   .catch(err => {
     res.send("Error : " + err.message)
