@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Express Session
-var session = require('express-session')
+var session = require('express-session');
 
 app.use(session({
   secret: 'hacktiv8',

@@ -3,11 +3,18 @@ var router = express.Router();
 
 const db = require('../models')
 
-// router.get('/', (req, res, next) => {
-//   res.render('login')
-// })
+const crypto = require('crypto')
+const hash = require('../helpers/cryptoHash')
 
 router.get('/', (req, res, next) => {
+  if (req.session.user) {
+    res.redirect('/index')
+  } else {
+    res.render('login')
+  }
+})
+
+router.get('/login', (req, res, next) => {
   if (req.session.user) {
     res.redirect('/index')
   } else {
@@ -23,10 +30,15 @@ router.post('/', (req, res, next) => {
       where: { username : req.body.username}
     })
     .then(findUser => {
-      console.log(findUser);
-      if (findUser.password == req.body.password) {
+      // console.log(findUser);
+      // Checking Hash
+      const secret = findUser.salt
+      const hashData = hash(req.body.password, secret)
+      
+      // if (findUser.password == req.body.password) {
+      if (hashData == findUser.password) {
         req.session.user = {
-          username: req.body.username,
+          username: findUser.username,
           role: findUser.role
         }
         if (findUser.role == 'teacher') {
@@ -49,6 +61,30 @@ router.post('/', (req, res, next) => {
 router.get('/logout', (req, res, next) => {
   req.session.destroy(err => {
     res.redirect('/')
+  })
+})
+
+router.get('/login/register', (req, res, next) => {
+  if (req.session.user) {
+    res.redirect('/index')
+  } else {
+    res.render('login/register')
+  }
+})
+
+router.post('/login/register', (req, res, next) => {
+  db.User.create({
+    username: req.body.username,
+    password: req.body.password,
+    role: req.body.role,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  })
+  .then(() => {
+    res.render('login')
+  })
+  .catch(err => {
+    res.send(err.message)
   })
 })
 
