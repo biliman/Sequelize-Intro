@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     hooks: {
       beforeCreate: (dataUser) => {
         const secret = salts()
-        const createHash = hash(secret, dataUser.password)
+        const createHash = hash(dataUser.password, secret)
         dataUser.password = createHash
         dataUser.salt = secret
       }
