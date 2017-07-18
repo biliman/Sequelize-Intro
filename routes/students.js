@@ -4,10 +4,14 @@ var router = express.Router();
 const db = require('../models');
 
 router.use((req, res, next) => {
-  if (req.session.user.role == 'academic' || req.session.user.role == 'headmaster' || req.session.user.role == 'teacher') {
-    next()
+  if (req.session.user == undefined) {
+    res.redirect('/')
   } else {
-    res.send('Anda tidak mempunyai otoritas ke menu ini!')
+    if (req.session.user.role == 'academic' || req.session.user.role == 'headmaster' || req.session.user.role == 'teacher') {
+      next()
+    } else {
+      res.send('Anda tidak mempunyai otoritas ke menu ini!')
+    }
   }
 })
 

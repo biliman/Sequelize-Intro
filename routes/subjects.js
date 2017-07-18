@@ -6,10 +6,14 @@ var letterScore = require('../helpers/letterScore')
 const db = require('../models');
 
 router.use((req, res, next) => {
-  if (req.session.user.role == 'academic' || req.session.user.role == 'headmaster') {
-    next()
+  if (req.session.user == undefined) {
+    res.redirect('/')
   } else {
-    res.send('Anda tidak punya akses ke menu ini!, hanya academic dan headmaster yang bisa akses ke menu ini!')
+    if (req.session.user.role == 'academic' || req.session.user.role == 'headmaster') {
+      next()
+    } else {
+      res.send('Anda tidak punya akses ke menu ini!, hanya academic dan headmaster yang bisa akses ke menu ini!')
+    }
   }
 })
 

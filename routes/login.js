@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
 router.get('/login', (req, res, next) => {
   if (req.session.user) {
     res.redirect('/index')
-  } else {
+  // } else {
     res.render('login')
   }
 })
@@ -30,12 +30,10 @@ router.post('/', (req, res, next) => {
       where: { username : req.body.username}
     })
     .then(findUser => {
-      // console.log(findUser);
       // Checking Hash
       const secret = findUser.salt
       const hashData = hash(req.body.password, secret)
       
-      // if (findUser.password == req.body.password) {
       if (hashData == findUser.password) {
         req.session.user = {
           username: findUser.username,
