@@ -42,4 +42,5 @@ app.use('/subjects', subjects)
 var students = require('./routes/students');
 app.use('/students', students)
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
+// app.listen(3000);
